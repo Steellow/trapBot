@@ -22,3 +22,5 @@ We're running the bot with [process manager 2](https://www.npmjs.com/package/pm2
 ## Todo
 
 - Add expenses calculator
+- `/update` command
+- Speedtest
