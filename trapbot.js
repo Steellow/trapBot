@@ -33,7 +33,6 @@ bot.command("/clear", (ctx) => {
 
 // Remove individual items by number
 bot.hears("/remove", (ctx) => ctx.reply("Specify which item to remove"));
-
 bot.hears(/\/remove (.+)/, (ctx) => {
   const index = Number(ctx.match[1]) - 1;
 
@@ -44,7 +43,10 @@ bot.hears(/\/remove (.+)/, (ctx) => {
   }
 });
 
-// Saves user input for shopping list
+// Saves user input for shopping list.
+// This function needs to be the last one,
+// otherwise all commands are matched to this one
+// instead of their correct functions
 bot.on("text", (ctx) => {
   const text = ctx.update.message.text;
   if (text[0] === "/") return;
