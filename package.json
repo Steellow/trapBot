@@ -1,13 +1,12 @@
 {
   "name": "trapbot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node trapbot.js",
+    "deploy": "git pull && npm i && pm2 restart trapbot"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Steellow & Iikkas",
   "dependencies": {
     "dotenv": "^10.0.0",
     "telegraf": "^4.5.2"
