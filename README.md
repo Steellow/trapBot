@@ -19,8 +19,15 @@ We're running the bot with [process manager 2](https://www.npmjs.com/package/pm2
 - `/list` or `/print` to print full list
 - `/remove` to remove individual item
 
+### Fast Speedtest
+
+- Tests download speed with fast-speedtest-api
+- `/speed` to get current download speed
+- `/average` to get an average of the hourly speeds
+- `/reset` to reset speed history to 0
+
 ## Todo
 
 - Add expenses calculator
 - `/update` command
-- Speedtest
+- Make remove command easier to use

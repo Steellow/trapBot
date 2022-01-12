@@ -1,5 +1,6 @@
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
+const { howFast, speedHistory } = require("./speedtest.js");
 
 ///////////////
 // Bot setup //
@@ -43,10 +44,33 @@ bot.hears(/\/remove (.+)/, (ctx) => {
   }
 });
 
+///////////////////////
+// Speedtest commands//
+///////////////////////
+
+bot.command("/speed", async (ctx) => {
+  const speed = await howFast();
+  speedHistory.push(speed);
+  console.log(speedHistory);
+  ctx.reply(`Speed: ${Math.round(speed)} Mbps`);
+});
+
+bot.command("/average", (ctx) => {
+  const sum = speedHistory.reduce((a, b) => a + b, 0);
+  const avg = sum / speedHistory.length || 0;
+  ctx.reply("Average speed is " + Math.round(avg) + " Mbps");
+});
+
+bot.command("/reset", (ctx) => {
+  speedHistory.splice(0, speedHistory.length);
+  ctx.reply("speed history has been reset to 0");
+});
+
 // Saves user input for shopping list.
 // This function needs to be the last one,
 // otherwise all commands are matched to this one
 // instead of their correct functions
+
 bot.on("text", (ctx) => {
   const text = ctx.update.message.text;
   if (text[0] === "/") return;
