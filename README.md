@@ -23,7 +23,7 @@ We're running the bot with [process manager 2](https://www.npmjs.com/package/pm2
 
 - Tests download speed with fast-speedtest-api
 - `/speed` to get current download speed
-- `/average` to get an average of the hourly speeds
+- `/average` to get an average of the download speeds
 - `/reset` to reset speed history to 0
 
 ## Todo
