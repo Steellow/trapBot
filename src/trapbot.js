@@ -1,6 +1,8 @@
 const { Telegraf } = require("telegraf");
 const { howFast, speedHistory } = require("./speedtest.js");
 const shoppingList = require("./shoppinglist");
+const expensesCalc = require("./expenses-calculator");
+const stringMath = require("string-math");
 require("dotenv").config();
 
 ///////////////
@@ -29,6 +31,18 @@ bot.command("/reset", (ctx) => {
   speedHistory.splice(0, speedHistory.length);
   ctx.reply("speed history has been reset to 0");
 });
+
+/////////////////////////
+// Expenses calculator //
+/////////////////////////
+
+bot.hears("/calc", (ctx) => {
+  expensesCalc.startCalculator();
+  ctx.reply("Hello, please enter the following data 🤑");
+  ctx.reply("Total costs:");
+});
+
+// More related stuff at 'input functions'
 
 ///////////////////
 // Shopping list //
@@ -64,15 +78,44 @@ bot.hears(/\/remove (.+)/, (ctx) => {
   }
 });
 
-// Saves user input for shopping list.
-// This function needs to be the last one,
-// otherwise all commands are matched to this one
-// instead of their correct functions
+// More related stuff at 'input functions'
+
+/////////////////////
+// Input functions //
+/////////////////////
+
+//! Input listeners need to be last
+//! functions, otherwise they block
+//! other bot listener functions!
+
+// Expenses calculator input listener
+bot.hears(expensesCalc.numberRegex, (ctx) => {
+  if (!expensesCalc.isRunning()) {
+    ctx.reply("Please start the calculator with /calc");
+    return;
+  }
+
+  try {
+    const input = ctx.match.input.replace(",", ".");
+    inputTotal = stringMath(input);
+  } catch (err) {
+    console.log(err);
+    ctx.reply("Invalid number/operation🔺 ");
+    return;
+  }
+
+  expensesCalc.forward(inputTotal, ctx);
+});
+
+// Shopping list input listener
+// Saves user input for shopping list
 bot.on("text", (ctx) => {
   const text = ctx.update.message.text;
   if (text[0] === "/") return;
   shoppingList.addItem(text);
 });
+
+/////////////////////////////
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));

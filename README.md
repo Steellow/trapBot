@@ -28,8 +28,13 @@ We're running the bot with [process manager 2](https://www.npmjs.com/package/pm2
 - `/average` to get an average of the download speeds
 - `/reset` to reset speed history to 0
 
+### Expenses calculator
+
+- Calculates expenses for each individual based on their purchases
+- Currently supports 2 users, will later expand for 3 users
+- Start the calculator with `/calc`
+
 ## Todo
 
-- Add expenses calculator
 - `/update` command
 - Make remove command easier to use
