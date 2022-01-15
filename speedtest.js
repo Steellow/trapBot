@@ -4,7 +4,6 @@ const FastSpeedtest = require("fast-speedtest-api");
 // Fast speedtest //
 ////////////////////
 
-const nextDate = new Date();
 const speedHistory = [];
 const speedtest = new FastSpeedtest({
   token: process.env.SPEEDTEST_TOKEN, // required
