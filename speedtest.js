@@ -1,4 +1,5 @@
 const FastSpeedtest = require("fast-speedtest-api");
+require("dotenv").config();
 
 ////////////////////
 // Fast speedtest //
