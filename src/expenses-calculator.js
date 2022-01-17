@@ -14,12 +14,14 @@ const startCalculator = () => {
 
 const isRunning = () => state.running;
 
-const showResults = (ctx) => {
+const showResults = async (ctx) => {
   const totalShared = (state.total - state.iikka - state.hanki).toFixed(2);
   const totalIikka = (totalShared / 2 + state.iikka).toFixed(2);
   const totalHanki = (totalShared / 2 + state.hanki).toFixed(2);
 
-  ctx.reply(`• Hanki: ${totalHanki}€\n• Iikka: ${totalIikka}€`);
+  await ctx.reply(
+    `•Total: ${state.total}€\n• Hanki: ${totalHanki}€\n• Iikka: ${totalIikka}€`
+  );
 };
 
 const resetState = () =>
@@ -30,17 +32,17 @@ const resetState = () =>
     hanki: undefined,
   });
 
-const forward = (input, ctx) => {
+const forward = async (input, ctx) => {
   if (state.total == undefined) {
     state = { ...state, total: input };
-    ctx.reply("Iikka's individual costs:");
+    await ctx.reply("Iikka's individual costs:");
   } else if (state.iikka == undefined) {
-    ctx.reply("=" + input.toFixed(2));
+    await ctx.reply("=" + input.toFixed(2));
     state = { ...state, iikka: input };
 
-    ctx.reply("Hanki's individual costs:");
+    await ctx.reply("Hanki's individual costs:");
   } else {
-    ctx.reply("=" + inputTotal.toFixed(2));
+    await ctx.reply("=" + inputTotal.toFixed(2));
     state = { ...state, hanki: input };
 
     showResults(ctx);

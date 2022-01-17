@@ -36,10 +36,12 @@ bot.command("/reset", (ctx) => {
 // Expenses calculator //
 /////////////////////////
 
-bot.hears("/calc", (ctx) => {
+// Using async func since it has 2 ctx.replies
+// Without await they might run in wrong order
+bot.hears("/calc", async (ctx) => {
   expensesCalc.startCalculator();
-  ctx.reply("Hello, please enter the following data 🤑");
-  ctx.reply("Total costs:");
+  await ctx.reply("Hello, please enter the following data 🤑");
+  await ctx.reply("Total costs:");
 });
 
 // More related stuff at 'input functions'
@@ -89,9 +91,9 @@ bot.hears(/\/remove (.+)/, (ctx) => {
 //! other bot listener functions!
 
 // Expenses calculator input listener
-bot.hears(expensesCalc.numberRegex, (ctx) => {
+bot.hears(expensesCalc.numberRegex, async (ctx) => {
   if (!expensesCalc.isRunning()) {
-    ctx.reply("Please start the calculator with /calc");
+    await ctx.reply("Please start the calculator with /calc");
     return;
   }
 
@@ -100,7 +102,7 @@ bot.hears(expensesCalc.numberRegex, (ctx) => {
     inputTotal = stringMath(input);
   } catch (err) {
     console.log(err);
-    ctx.reply("Invalid number/operation🔺 ");
+    await ctx.reply("Invalid number/operation🔺 ");
     return;
   }
 
