@@ -20,7 +20,7 @@ const showResults = async (ctx) => {
   const totalHanki = (totalShared / 2 + state.hanki).toFixed(2);
 
   await ctx.reply(
-    `•Total: ${state.total}€\n• Hanki: ${totalHanki}€\n• Iikka: ${totalIikka}€`
+    `• Total: ${state.total}€\n• Hanki: ${totalHanki}€\n• Iikka: ${totalIikka}€`
   );
 };
 
