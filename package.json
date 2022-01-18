@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node trapbot.js",
+    "start": "node src/trapbot.js",
     "deploy": "git pull && npm i && pm2 restart trapbot"
   },
   "author": "Steellow & Iikkas",
   "dependencies": {
     "dotenv": "^10.0.0",
     "fast-speedtest-api": "^0.3.2",
+    "string-math": "^1.2.2",
     "telegraf": "^4.5.2"
   }
 }
